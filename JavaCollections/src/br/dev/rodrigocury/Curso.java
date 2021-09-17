@@ -3,30 +3,21 @@ package br.dev.rodrigocury;
 import br.dev.rodrigocury.utils.StringUtils;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class Curso {
-    private int tempoTotal = 0;
+    private int tempoTotal;
     private String nome;
     private String instrutor;
     private List<Aula> aulas = new LinkedList<>();
+    private Set<Aluno> alunos = new HashSet<>();
 
     public Curso(String nome, String instrutor) {
         this.nome = StringUtils.capitalize(nome);
         this.instrutor = StringUtils.capitalize(instrutor);
-    }
-
-    public Curso(String nome, String instrutor, List<Aula> aulas) {
-        this(nome, instrutor);
-        for (int i = 0; i < aulas.size(); i++) {
-            aulas.get(i).setNumeroDaAula(i + 1);
-            this.add(aulas.get(i));
-        }
-    }
-
-    public Curso(String nome, String instrutor, Aula... aula) {
-        this(nome, instrutor, List.of(aula));
     }
 
     public String getNome() {
@@ -41,6 +32,8 @@ public class Curso {
         return Collections.unmodifiableList(this.aulas);
     }
 
+    public Set<Aluno> getAlunos() { return Collections.unmodifiableSet(this.alunos); }
+
     public void add(Aula aula) {
         aula.setNumeroDaAula(this.aulas.size() + 1);
         this.aulas.add(aula);
@@ -51,8 +44,21 @@ public class Curso {
         List.of(aulas).forEach(this::add);
     }
 
+    public void add(Aluno aluno) {
+        this.alunos.add(aluno);
+        aluno.matriculaNoCurso(this);
+    }
+
+    public void add(Aluno... alunos) {
+        List.of(alunos).forEach(this::add);
+    }
+
     public int getTotalAulas() {
         return this.aulas.size();
+    }
+
+    public int getTotalAlunos() {
+        return this.alunos.size();
     }
 
     public int getTempoTotal() {
