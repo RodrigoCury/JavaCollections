@@ -9,9 +9,9 @@ import java.util.Comparator;
 public class TestaListaDeAulas {
 
     public static void main(String[] args) {
-        Aula a1 = new Aula("Revisitando Arrays", 12, 1);
-        Aula a2 = new Aula("Listas de objetos", 12, 7);
-        Aula a3 = new Aula("Relacionamento de listas de objetos", 15, 3);
+        Aula a1 = new Aula("Revisitando Arrays", 12);
+        Aula a2 = new Aula("Listas de objetos", 12);
+        Aula a3 = new Aula("Relacionamento de listas de objetos", 13);
 
         ArrayList<Aula> aulas = new ArrayList<>();
         aulas.add(a1);
