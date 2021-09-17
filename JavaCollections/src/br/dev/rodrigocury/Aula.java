@@ -5,15 +5,11 @@ import br.dev.rodrigocury.utils.StringUtils;
 public class Aula implements Comparable<Aula>{
     private String titulo;
     private int tempo;
-    private int numeroDaAula;
+    private int numeroDaAula = -1;
 
     public Aula(String titulo, int tempo){
         this.titulo = StringUtils.capitalize(titulo);
         this.tempo = tempo;
-    }
-    public Aula(String titulo, int tempo, int numeroDaAula){
-        this(titulo, tempo);
-        this.numeroDaAula = numeroDaAula;
     }
 
     public int getTempo() {
