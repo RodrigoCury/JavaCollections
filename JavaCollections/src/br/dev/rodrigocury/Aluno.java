@@ -2,6 +2,7 @@ package br.dev.rodrigocury;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Aluno {
@@ -11,6 +12,8 @@ public class Aluno {
      private Set<Curso> cursosMatriculados = new HashSet<>();
 
     public Aluno(String nome, int numeroMatricula) {
+        if (nome == null)
+            throw new NullPointerException();
         this.nome = nome;
         this.numeroMatricula = numeroMatricula;
     }
@@ -37,5 +40,20 @@ public class Aluno {
                 "nome='" + nome + '\'' +
                 ", numeroMatricula=" + numeroMatricula +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o){
+        try {
+            Aluno outroAluno = (Aluno) o;
+            return this.nome.equals(outroAluno.nome);
+        } catch (ClassCastException e){
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome);
     }
 }
