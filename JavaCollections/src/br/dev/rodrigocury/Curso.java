@@ -65,6 +65,14 @@ public class Curso {
         return this.tempoTotal;
     }
 
+    public boolean estaMatriculado(Aluno aluno){
+        return  this.alunos.contains(aluno);
+    }
+
+    public boolean temAAula(Aula aula){
+        return this.aulas.contains(aula);
+    }
+
     @Override
     public String toString() {
         String toPrint = String.format("Curso: %s - instrutor: %s \nAulas:\n", this.nome, this.instrutor);
