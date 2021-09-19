@@ -34,6 +34,14 @@ public class Aluno {
         return cursosMatriculados.size();
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public int getNumeroMatricula() {
+        return numeroMatricula;
+    }
+
     @Override
     public String toString() {
         return "Aluno{" +
