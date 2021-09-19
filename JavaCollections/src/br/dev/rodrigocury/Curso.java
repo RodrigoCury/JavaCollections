@@ -2,11 +2,7 @@ package br.dev.rodrigocury;
 
 import br.dev.rodrigocury.utils.StringUtils;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Curso {
     private int tempoTotal;
@@ -14,6 +10,7 @@ public class Curso {
     private String instrutor;
     private List<Aula> aulas = new LinkedList<>();
     private Set<Aluno> alunos = new HashSet<>();
+    private Map<Integer, Aluno> matriculaParaAlunos = new HashMap<>();
 
     public Curso(String nome, String instrutor) {
         this.nome = StringUtils.capitalize(nome);
@@ -40,13 +37,15 @@ public class Curso {
         this.tempoTotal += aula.getTempo();
     }
 
-    public void add(Aula... aulas) {
-        List.of(aulas).forEach(this::add);
-    }
-
     public void add(Aluno aluno) {
         this.alunos.add(aluno);
         aluno.matriculaNoCurso(this);
+        matriculaParaAlunos.put(aluno.getNumeroMatricula(), aluno);
+    }
+
+    public void add(Aula... aulas) {
+        List.of(aulas).forEach(this::add);
+
     }
 
     public void add(Aluno... alunos) {
@@ -81,5 +80,14 @@ public class Curso {
             toPrint = toPrint.concat(aula.toString() + "\n");
         }
         return toPrint;
+    }
+
+    public Aluno buscaMatriculado(int nMatricula) {
+        return matriculaParaAlunos.get(nMatricula);
+//        for (Aluno aluno: alunos){
+//            if (aluno.getNumeroMatricula() == nMatricula)
+//                return aluno;
+//        }
+//        throw new NoSuchElementException();
     }
 }
